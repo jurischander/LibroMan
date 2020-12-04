@@ -10,6 +10,60 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>LibroManApp</artifactId>
+    <packaging>ear</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>de.schander</groupId>
+            <artifactId>LibroManAPI</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>de.schander</groupId>
+            <artifactId>LibroManData</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>de.schander</groupId>
+            <artifactId>LibroManSvc</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>de.schander</groupId>
+            <artifactId>LibroManWeb</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <version>15</version>
+                    <defaultBundleDir>lib</defaultBundleDir>
+                    <modules>
+                        <webModule>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>LibroManWeb</artifactId>
+                            <contextRoot>/LibroManWeb</contextRoot>
+                            <bundleFileName>LibroManWeb.war</bundleFileName>
+                        </webModule>
+                        <ejbModule>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>LibroManSvc</artifactId>
+                            <bundleFileName>LibroManSvc.jar</bundleFileName>
+                        </ejbModule>
+                    </modules>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
